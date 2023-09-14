@@ -1,0 +1,350 @@
+algoritmo "cadastro_de_cliente"
+
+var
+   nome,end,cel,idade,sexo,prof,CPF,ID,email : vetor[1..50,1..9] de caractere
+   cont_final,cont,opcoes,i : inteiro
+   x,id_cadastro: caractere
+
+         
+procedimento menu()
+
+inicio
+   escreval("")
+   escreval("============={Lista de Operações}=============")
+   escreval("1-Nova lista de cadastro")
+   escreval("2-Adicionar cadastro")
+   escreval("3-Mostrar lista de cadastros")
+   escreval("4-Buscar cadastro")
+   escreval("5-Excluir cadastro")
+   escreval("6-Editar cadastro")
+   escreval("7-Sair")
+   escreval("==============================================")
+   escreval("Digite a opção:")
+   leia(opcoes)
+   limpatela
+
+fimprocedimento
+
+// Adicionar Cadastro
+procedimento ad_cadastro()
+inicio
+   cont_final <- cont_final + 1
+
+   escreval("Digite o nome:")
+   leia(nome[cont_final])
+   limpatela
+
+   escreval("Digite o endereço ou CEP:")
+   leia(end[cont_final])
+   limpatela
+
+   escreval("Digite o endereço de e-mail:")
+   leia(email[cont_final])
+   limpatela
+
+   escreval("Digite um número de telefone:")
+   leia(cel[cont_final])
+   limpatela
+
+   escreval("Digite a idade:")
+   leia(idade[cont_final])
+   limpatela
+
+   escreval("Digite o sexo:")
+   leia(sexo[cont_final])
+   limpatela
+
+   escreval("Digite a profissão:")
+   leia(prof[cont_final])
+   limpatela
+
+   escreval("Digite o CPF:")
+   leia(CPF[cont_final])
+   limpatela
+
+   escreval("Digite um ID para o cadastro:")
+   leia(ID[cont_final])
+   limpatela
+fimprocedimento
+
+//Cadastro
+procedimento cadastro()
+inicio
+   escreval("Digite quantos cadastros você quer relizar")
+   escreval("=={Para voltar ao menu inicial Digite 0}==")
+   leia(cont_final)
+   limpatela
+
+   para cont de 1 ate cont_final faca
+
+         escreval("Digite o nome:")
+         leia(nome[cont])
+         limpatela
+
+         escreval("Digite o endereço ou CEP:")
+         leia(end[cont])
+         limpatela
+
+         escreval("Digite o endereço de e-mail:")
+         leia(email[cont])
+         limpatela
+
+         escreval("Digite um telefone para contato:")
+         leia(cel[cont])
+         limpatela
+
+         escreval("Digite a idade:")
+         leia(idade[cont])
+         limpatela
+
+         escreval("Digite o sexo:")
+         leia(sexo[cont])
+         limpatela
+
+         escreval("Digite a profissão:")
+         leia(prof[cont])
+         limpatela
+
+         escreval("Digite o CPF:")
+         leia(CPF[cont])
+         limpatela
+
+         escreval("Digite um ID:")
+         leia(ID[cont])
+         limpatela
+
+   fimpara
+fimprocedimento
+
+
+
+//Mostrar lista
+procedimento mostrar_lista()
+
+inicio
+
+   escreval("=========={Lista de Cadastro}===========")
+   para cont de 1 ate cont_final faca
+      escreval("=========={Cadastro nº",(cont),"}===========")
+      escreval("nome: ",nome[cont])
+      escreval("Endereço: ",end[cont])
+      escreval("E-mail: ",email[cont])
+      escreval("Número de Celular: ",cel[cont])
+      escreval("Idade: ",idade[cont])
+      escreval("Sexo: ",sexo[cont])
+      escreval("Profissão: ",prof[cont])
+      escreval("CPF: ",CPF[cont])
+      escreval("ID: ",ID[cont])
+      escreval("========================================")
+
+   fimpara
+
+   se (ID[cont]="") entao
+
+      escreval("=================< ERRO >====================")
+      escreval("==============<{Lista Vázia}>================")
+      escreval("=============================================")
+   fimse
+fimprocedimento
+
+// buscar cadastro
+procedimento busca_cadastro()
+var
+   encontrado : logico
+
+inicio
+
+   limpatela
+   escreval("Digite o ID do cadastro:")
+   leia(x)
+   limpatela
+   encontrado <- falso
+
+   para cont de 1 ate cont_final faca
+      se x=ID[cont] entao
+         encontrado <- verdadeiro
+
+         escreval("======={Cadastro encontrado}=======")
+         escreval("Nome: ",nome[cont])
+         escreval("Endereço: ",end[cont])
+         escreval("E-mail: ",email[cont])
+         escreval("Número de Celular: ",cel[cont])
+         escreval("Idade: ",idade[cont])
+         escreval("Sexo: ",sexo[cont])
+         escreval("Profissão: ",prof[cont])
+         escreval("CPF: ",CPF[cont])
+         escreval("ID: ",ID[cont])
+         escreval("==================================")
+      fimse
+   fimpara
+   se não encontrado entao
+
+      escreval("================< ERRO >=====================")
+      escreval("========={Cadastro não encontrado}============")
+      escreval("=============================================")
+
+   fimse
+fimprocedimento
+
+//Excluir cadastro
+procedimento excluir()
+var
+   id_cadastro: caractere
+   encontrado: logico
+   posicao: inteiro
+
+inicio
+   limpatela
+   escreval("Digite o ID do cadastro para ser excluído:")
+   leia(id_cadastro)
+   encontrado <- falso
+   posicao <- 0
+
+   para cont de 1 ate cont_final faca
+      se id_cadastro = ID[cont] entao
+         encontrado <- verdadeiro
+         posicao <- cont
+         // Sai do loop, pois já encontrou o cliente
+      fimse
+   fimpara
+
+   se encontrado entao
+      escreval("======={Excluindo Cliente}=======")
+
+      para cont de posicao ate cont_final-1 faca
+         // Move os registros seguintes uma posição para trás
+         nome[cont] <- nome[cont+1]
+         end[cont] <- end[cont+1]
+         email[cont] <- email[cont+1]
+         cel[cont] <- cel[cont+1]
+         idade[cont] <- idade[cont+1]
+         sexo[cont] <- sexo[cont+1]
+         prof[cont] <- prof[cont+1]
+         CPF[cont] <- CPF[cont+1]
+         ID[cont] <- ID[cont+1]
+      fimpara
+
+      // Limpa o último registro (que ficou duplicado)
+      nome[cont_final] <- ""
+      end[cont_final] <- ""
+      email[cont_final] <- ""
+      cel[cont_final] <- ""
+      idade[cont_final] <- ""
+      sexo[cont_final] <- ""
+      prof[cont_final] <- ""
+      CPF[cont_final] <- ""
+      ID[cont_final] <- ""
+      cont_final <- cont_final - 1 // Decrementa o contador de cadastros
+      limpatela
+      escreval("======= Cadastro Excluído =======")
+   senao
+      escreval("================< ERRO >=====================")
+      escreval("========={Cadastro não encontrado}============")
+      escreval("=============================================")
+   fimse
+fimprocedimento
+
+//Editar cadastro
+procedimento editar()
+var
+   id_cadastro: caractere
+   encontrado: logico
+inicio
+   limpatela
+   escreval("Digite o ID do cadastro para ser editado:")
+   leia(id_cadastro)
+   encontrado <- falso
+
+   para cont de 1 ate cont_final faca
+      se id_cadastro = ID[cont] entao
+         encontrado <- verdadeiro
+
+         escreval("======={Editando Cadastro}=======")
+
+         escreval("Nome atual: ", nome[cont])
+         escreval("Digite o novo nome:")
+         leia(nome[cont])
+
+         escreval("Endereço atual: ", end[cont])
+         escreval("Digite o novo endereço:")
+         leia(end[cont])
+
+         escreval("E-mail atual: ", email[cont])
+         escreval("Digite o novo e-mail:")
+         leia(email[cont])
+
+         escreval("Número de Celular atual: ", cel[cont])
+         escreval("Digite o novo número de celular:")
+         leia(cel[cont])
+
+         escreval("Idade atual: ", idade[cont])
+         escreval("Digite a nova idade:")
+         leia(idade[cont])
+
+         escreval("Sexo atual: ", sexo[cont])
+         escreval("Digite o novo sexo:")
+         leia(sexo[cont])
+
+         escreval("Profissão atual: ", prof[cont])
+         escreval("Digite a nova profissão:")
+         leia(prof[cont])
+
+         escreval("CPF atual: ", CPF[cont])
+         escreval("Digite o novo CPF:")
+         leia(CPF[cont])
+
+         escreval("ID atual: ", ID[cont])
+         escreval("Digite o novo ID:")
+         leia(ID[cont])
+
+         escreval("======= Cadastro Atualizado =======")
+         menu()
+      fimse
+   fimpara
+
+   se nao encontrado entao
+
+      escreval("================< ERRO >=====================")
+      escreval("========={Cadstro não encontrado}============")
+      escreval("=============================================")
+   fimse
+fimprocedimento
+
+//INICIO PARTE LÓGICA
+inicio
+   repita
+      menu()
+
+      escolha opcoes
+      caso 1
+         cadastro()
+         //Cadastro
+
+      caso 2
+         ad_cadastro()
+
+      caso 3
+         mostrar_lista()
+         //mostrar lista de cadastro
+
+      caso 4
+         busca_cadastro()
+         //Buscar cadastro
+
+      caso 5
+         excluir()
+         //Excluir cadastro
+
+      caso 6
+         editar()
+         //Editar cadastro
+                     
+      caso 7
+         escreval("=======> Fechando Programa <======")
+         interrompa
+
+      outrocaso
+         escreval("========> Opção invalida <========")
+      fimescolha
+   ATE opcoes=7
+fimalgoritmo
